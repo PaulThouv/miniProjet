@@ -33,12 +33,10 @@ function uploadImage($photo)
             $result = $chemin . $file;
         }
     } else {
-        echo '<h1>erreur</h1>';
+        echo '<h1>Erreur ! Problème lors de l\'upload de l\'image</h1>';
     }
     return $result;
 }
-
-echo("mabite");
 
 // requete pour ajouter un Joueur a la BD
 $qAjouterJoueur = 'INSERT INTO joueur(Nom,Prenom,Numero_Licence,Photo,Date_Naissance,Taille,Poids,Poste_Prefere_Statut_Commentaires) 
