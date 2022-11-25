@@ -1,8 +1,8 @@
 <?php
 
+// -----------------------------------------------Requetes--------------------------------------------------------------------
 
-$qAjouterJoueur = 'INSERT INTO joueur (Nom,Prenom,Numero_Licence,Photo,Date_Naissance,Taille,Poids,Poste_Prefere,Statut,Commentaires) 
-                    VALUES (:nom , :prenom,:numerolicence ,:dateNaissance,:taille,:poids,:posteprefere,:statut, :commentaires)';
+
 
 $qAjouterMatch = 'INSERT INTO unmatch (Nom,Prenom,Numero_Licence,Photo,Date_Naissance,Taille,Poids,Poste_Prefere,Statut,Commentaires) 
 VALUES (:nom , :prenom,:numerolicence ,:dateNaissance,:taille,:poids,:posteprefere,:statut, :commentaires)';
@@ -72,9 +72,9 @@ function uploadImage($photo)
         $extension = strtolower(end($tabExtension));
 
         $extensions = ['jpg', 'png', 'jpeg', 'gif', 'svg', 'webp', 'bmp'];
-        $maxSize = 400000;
+        // $maxSize = 40000000000000000; && $size <= $maxSize
 
-        if (in_array($extension, $extensions) && $size <= $maxSize && $error == 0) {
+        if (in_array($extension, $extensions)  && $error == 0) {
 
             $uniqueName = uniqid('', true);
             //uniqid génère quelque chose comme ca : 5f586bf96dcd38.73540086
@@ -90,29 +90,44 @@ function uploadImage($photo)
     return $result;
 }
 
-// -----------------------------------------------Enfant--------------------------------------------------------------------
+
+// -----------------------------------------------Joueur--------------------------------------------------------------------
+$qAjouterJoueur = 'INSERT INTO joueur (Nom,Prenom,Numero_Licence,Photo,Date_Naissance,Taille,Poids,Poste_Prefere,Statut,Commentaires) 
+                    VALUES (:nom , :prenom,:numerolicence, :photo ,:dateNaissance,:taille,:poids,:posteprefere,:statut, :commentaires)';
 
 // fonction qui permet d'ajouter un enfant a la BD
-function ajouterEnfant(
-    $nom,
-    $prenom,
-    $dateNaissance,
-    $lienJeton
+function ajouterJoueur(
+    $Nom,
+    $Prenom,
+    $Numero_Licence,
+    $Photo,
+    $Date_Naissance,
+    $Taille,
+    $Poids,
+    $Poste_Prefere,
+    $Statut,
+    $Commentaires
 ) {
 
     // connexion a la BD
     $linkpdo = connexionBd();
     // preparation de la requete sql
-    $req = $linkpdo->prepare($GLOBALS['qAjouterEnfant']);
+    $req = $linkpdo->prepare($GLOBALS['qAjouterJoueur']);
     if ($req == false) {
         die('Erreur ! Il y a un probleme lors de la preparation de la requete pour ajouter un enfant a la BD');
     }
     // execution de la requete sql
     $req->execute(array(
-        ':nom' => clean($nom),
-        ':prenom' => clean($prenom),
-        ':dateNaissance' => clean($dateNaissance),
-        ':lienJeton' => clean($lienJeton)
+        ':nom' => clean($Nom),
+        ':prenom' => clean($Prenom),
+        ':numerolicence' => clean($Numero_Licence),
+        ':photo' => clean($Photo),
+        ':dateNaissance' => clean($Date_Naissance),
+        ':taille' => clean($Taille),
+        ':poids' => clean($Poids),
+        ':posteprefere' => clean($Poste_Prefere),
+        ':statut' => clean($Statut),
+        ':commentaires' => clean($Commentaires)
     ));
     if ($req == false) {
         die('Erreur ! Il y a un probleme lors l\'execution de la requete pour ajouter un enfant a la BD');
