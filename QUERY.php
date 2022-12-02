@@ -180,10 +180,9 @@ function AfficherInformationsJoueurs($idJoueur)
                 echo '<label for="champPrénom">Prénom :</label>
                 <input type="text" name="champPrénom" placeholder="Entrez le prénom" minlength="1" maxlength="50" value="' . $value . '"required>
                 <span></span>';
-            
-            } elseif ($key == 'Date_Naissance') {
-                echo '<label for="champDateDeNaissance">Date de naissance :</label>
-                <input type="date" name="champDateDeNaissance" id="champDateDeNaissance" min="1900-01-01" max="<?php echo date(\'Y-m-d\'); ?>" value="' . $value . '" required>
+            } elseif ($key == 'Photo') {
+                echo '<label for="champPhoto">Photo :</label>
+                <input type="text" name="champPhoto" placeholder="Entrez la photo" minlength="1" maxlength="50" value="' . $value . '"required>
                 <span></span>';
             } elseif ($key == 'Taille') {
                 echo '
@@ -195,7 +194,7 @@ function AfficherInformationsJoueurs($idJoueur)
                 <label for="champPoids">Poids :</label>
                 <input type="text" name="champPoids" placeholder="Entrez le poids" value=' . $value . ' oninput="this.value = this.value.replace(/[^0-9.]/g, \'\').replace(/(\..*)\./g, \'$1\');" maxlength="5" required>
                 <span></span>';
-            } elseif ($key == 'PostePrefere') {
+            } elseif ($key == 'Poste_Prefere') {
                 echo '<label for="champPostePrefere"> Poste Préféré :</label>
                 <input type="text" name="champPostePrefere" placeholder="Entrez le poste préféré" maxlength="50" value="' . $value . '"  required>
                 <span></span>';
@@ -214,10 +213,10 @@ function AfficherInformationsJoueurs($idJoueur)
 
 
 
-$qModifierInformationsJoueur = 'UPDATE Joueur SET Nom=:nom, Prenom=:prenom,Photo:photo,Date_naissance=:dateNaissance,
+$qModifierInformationsJoueur = 'UPDATE Joueur SET Nom=:nom, Prenom=:prenom, Photo:photo,
  Taille=:taille, Poids=:poids,Poste_Prefere=:postePrefere, Statut=:statut,Commentaires=:commentaires WHERE Id_Joueur = :idJoueur';
 // fonction qui permet de modifier les informations du membre de la session
-function modifierJoueurSession($idJoueur, $nom, $prenom,$photo,$dateNaissance,$taille,$poids,$postePrefere,$statut,$commentaires)
+function modifierJoueurSession($idJoueur, $nom, $prenom,$photo,$taille,$poids,$postePrefere,$statut,$commentaires)
 {
     // connexion a la BD
     $linkpdo = connexionBd();
@@ -229,10 +228,10 @@ function modifierJoueurSession($idJoueur, $nom, $prenom,$photo,$dateNaissance,$t
     }
     // execution de la requete sql
     $req->execute(array(
+        ':idJoueur'=> $idJoueur,
         ':nom' => clean($nom),
         ':prenom'=> clean($prenom),
         ':photo'=> clean($photo),
-        ':dateNaissance'=> clean($dateNaissance),
         ':taille' => clean($taille),
         ':poids'=> clean($poids),
         ':postePrefere'=> clean($postePrefere), 
