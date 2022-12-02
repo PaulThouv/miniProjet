@@ -11,12 +11,11 @@ VALUES (:nom , :prenom,:numerolicence ,:dateNaissance,:taille,:poids,:posteprefe
 $qAjouterJoueur = 'INSERT INTO joueur(Nom,Prenom,Numero_Licence,Photo,Date_Naissance,Taille,Poids,Poste_Prefere,Statut,Commentaires) 
                     VALUES (:nom , :prenom, :numeroLicence, :photo, :dateNaissance, :taille,:poids,:postePrefere,:statut,:commentaires)';
 
-// requete pour verifier qu'un enfant avec les données en parametre n'existe pas deja dans la BD
-$qJoueurIdentique = 'SELECT Nom, Prenom, Date_Naissance, Numero_Licence FROM joueur 
-                    WHERE Nom = :nom AND Prenom = :prenom AND Date_Naissance = :dateNaissance AND Numero_Licence = :numeroLicence';
+
 
 // requete pour afficher le nom prenom de tous les enfants dont un membre s'occupe (pour le moment ca affiche tout le monde)
 $qAfficherNomPrenomJoueur = 'SELECT Id_Joueur, Nom,Prenom FROM Enfant ORDER BY Nom';
+
 
 // fonction qui permet de se connecter a la BD
 function connexionBd()
@@ -25,7 +24,7 @@ function connexionBd()
     // cDRvPP\2mwea(LGp
     // https://test-saetrisomie21.000webhostapp.com/
     $SERVER = '127.0.0.1';
-    $DB = 'equipe_rubgy';
+    $DB = 'equipe_rugby';
     $LOGIN = 'root';
     $MDP = '';
     // tentative de connexion a la BD
@@ -134,6 +133,9 @@ function ajouterJoueur(
     }
 }
 
+// requete pour verifier qu'un enfant avec les données en parametre n'existe pas deja dans la BD
+$qJoueurIdentique = 'SELECT Nom, Prenom, Date_Naissance, Numero_Licence FROM joueur 
+                    WHERE Nom = :nom AND Prenom = :prenom AND Date_Naissance = :dateNaissance AND Numero_Licence = :numeroLicence';
 function joueurIdentique(
     $nom,
     $prenom,
@@ -152,13 +154,71 @@ function joueurIdentique(
         ':nom' => clean($nom),
         ':prenom' => clean($prenom),
         ':dateNaissance' => clean($dateNaissance),
-        ':numeroLicence' => clean($numerolicence)
+        ':numeroLicence' => clean($numLicence)
     ));
     if ($req == false) {
         die('Erreur ! Il y a un probleme lors l\'execution de la requete pour verifier si un joueur existe deja');
     }
     return $req->rowCount(); // si ligne > 0 alors enfant deja dans la BD
 }
+
+$qAfficherJoueur = 'SELECT id_Joueur, Nom, Prenom, Numero_Licence, Poste_Prefere FROM joueur';
+function AfficherJoueur()
+{
+    // connexion a la BD
+    $linkpdo = connexionBd();
+    // preparation de la requete sql
+    $req = $linkpdo->prepare($GLOBALS['qAfficherJoueur']);
+    if ($req == false) {
+        die('Erreur ! Il y a un probleme lors de la preparation de la requete pour afficher les information des membres');
+    }
+    // execution de la requete sql
+    $req->execute();
+    if ($req == false) {
+        die('Erreur ! Il y a un probleme lors de la preparation de la requete pour afficher les information des membres');
+    }
+    // permet de parcourir toutes les lignes de la requete
+    while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+        echo '<tr>';
+        // permet de parcourir toutes les colonnes de la requete
+        foreach ($data as $key => $value) {
+            // selectionne toutes les colonnes $key necessaires
+            if ($key == 'Nom' || $key == 'Prenom' || $key == 'Numero_Licence' || $key == 'Poste_Prefere') {
+                echo '<td>' . $value . '</td>';
+            }
+            // recuperation valeurs importantes dans des variables
+            if ($key == 'id_Joueur') {
+                $idJoueur = $value;
+            }
+        }
+        // creation du bouton supprimer dans le tableau
+        echo '
+            <td>
+                <input type="submit" name="boutonSupprimer" value="' . $idJoueur . '"
+                </input>
+            </td>
+        </tr>';
+    }
+}
+
+$qSupprimerJoueur = 'DELETE FROM joueur WHERE Id_Joueur = :idJoueur';
+// fonction qui permet de supprimer un membre a partir de son idMembre
+function supprimerJoueur($idJoueur)
+{
+    // connexion a la base de donnees
+    $linkpdo = connexionBd();
+    //on supprime le membre
+    $req = $linkpdo->prepare($GLOBALS['qSupprimerJoueur']);
+    if ($req == false) {
+        die('Erreur ! Il y a un probleme lors de la preparation de la requete pour supprimer un membre de la BD');
+    }
+    // execution de la requete sql
+    $req->execute(array(':idJoueur' => clean($idJoueur)));
+    if ($req == false) {
+        die('Erreur ! Il y a un probleme lors l\'execution de la requete pour supprimer un membre de la BD');
+    }
+}
+
 $qRechercherUnJoueur = 'SELECT Nom, Prenom, Numero_Licence,Photo,Date_naissance, Taille, Poids,Poste_Prefere, Statut,Commentaires FROM joueur WHERE Id_Joueur = :id';
 function rechercherJoueur($idJoueur)
 {
@@ -195,7 +255,6 @@ function AfficherInformationsJoueurs($idJoueur)
                 echo '<label for="champPrénom">Prénom :</label>
                 <input type="text" name="champPrénom" placeholder="Entrez le prénom" minlength="1" maxlength="50" value="' . $value . '"required>
                 <span></span>';
-            
             } elseif ($key == 'Date_Naissance') {
                 echo '<label for="champDateDeNaissance">Date de naissance :</label>
                 <input type="date" name="champDateDeNaissance" id="champDateDeNaissance" min="1900-01-01" max="<?php echo date(\'Y-m-d\'); ?>" value="' . $value . '" required>
@@ -232,7 +291,7 @@ function AfficherInformationsJoueurs($idJoueur)
 $qModifierInformationsJoueur = 'UPDATE Joueur SET Nom=:nom, Prenom=:prenom,Photo:photo,Date_naissance=:dateNaissance,
  Taille=:taille, Poids=:poids,Poste_Prefere=:postePrefere, Statut=:statut,Commentaires=:commentaires WHERE Id_Joueur = :idJoueur';
 // fonction qui permet de modifier les informations du membre de la session
-function modifierJoueurSession($idJoueur, $nom, $prenom,$photo,$dateNaissance,$taille,$poids,$postePrefere,$statut,$commentaires)
+function modifierJoueurSession($idJoueur, $nom, $prenom, $photo, $dateNaissance, $taille, $poids, $postePrefere, $statut, $commentaires)
 {
     // connexion a la BD
     $linkpdo = connexionBd();
@@ -245,14 +304,14 @@ function modifierJoueurSession($idJoueur, $nom, $prenom,$photo,$dateNaissance,$t
     // execution de la requete sql
     $req->execute(array(
         ':nom' => clean($nom),
-        ':prenom'=> clean($prenom),
-        ':photo'=> clean($photo),
-        ':dateNaissance'=> clean($dateNaissance),
+        ':prenom' => clean($prenom),
+        ':photo' => clean($photo),
+        ':dateNaissance' => clean($dateNaissance),
         ':taille' => clean($taille),
-        ':poids'=> clean($poids),
-        ':postePrefere'=> clean($postePrefere), 
-        ':statut'=> clean($statut),
-        ':commentaires'=> clean($commentaires)
+        ':poids' => clean($poids),
+        ':postePrefere' => clean($postePrefere),
+        ':statut' => clean($statut),
+        ':commentaires' => clean($commentaires)
     ));
     if ($req == false) {
         die('Erreur ! Il y a un probleme lors l\'execution de la requete pour permet de modifier les informations du joueur de la 

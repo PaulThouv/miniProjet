@@ -11,18 +11,25 @@
 <?php
 require('QUERY.php');
 if (champRempli(array('nom', 'prenom', 'numeroLicence', 'dateNaissance', 'taille', 'poids', 'poste', 'statut', 'commentaire'))) {
-    ajouterJoueur(
+    if (joueurIdentique(
         $_POST['nom'],
         $_POST['prenom'],
-        $_POST['numeroLicence'],
-        uploadImage($_FILES['photo']),
         $_POST['dateNaissance'],
-        $_POST['taille'],
-        $_POST['poids'],
-        $_POST['poste'],
-        $_POST['statut'],
-        $_POST['commentaire']
-    );
+        $_POST['numeroLicence']
+    ) == 0) {
+        ajouterJoueur(
+            $_POST['nom'],
+            $_POST['prenom'],
+            $_POST['numeroLicence'],
+            uploadImage($_FILES['photo']),
+            $_POST['dateNaissance'],
+            $_POST['taille'],
+            $_POST['poids'],
+            $_POST['poste'],
+            $_POST['statut'],
+            $_POST['commentaire']
+        );
+    }
 }
 // }
 ?>
