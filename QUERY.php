@@ -322,3 +322,28 @@ function modifierJoueurSession($idJoueur, $nom, $prenom, $photo, $taille, $poids
             session');
     }
 }
+//-----------------------------------------LE MATCH-------------------------------------------------------
+
+
+$qAjouterMatch = 'INSERT INTO unmatch(Date_Heure_Match,Nom_Adversaire,Lieu_Rencontre,Resultat) 
+VALUES (:idUnMatch,:dateHeureMatch,:nomAdversaire,:lieuRencontre,:resultat)';
+function ajouterMatch($dateHeureMatch,$nomAdversaire,$lieuRencontre,$resultat){
+    // connexion a la BD
+    $linkpdo = connexionBd();
+    // preparation de la requete sql
+    $req = $linkpdo->prepare($GLOBALS['qAjouterMatch']);
+    if ($req == false) {
+        die('Erreur ! Il y a un probleme lors de la preparation de la requete pour ajouter un enfant a la BD');
+    }
+    // execution de la requete sql
+    $req->execute(array(
+        ':Date_Heure_Match' => clean($dateHeureMatch),
+        ':Nom_Adversaire' => clean($nomAdversaire),
+        ':lieuRencontre' => clean($lieuRencontre),
+        ':Resultat' => clean($resultat)
+    ));
+    if ($req == false) {
+        die('Erreur ! Il y a un probleme lors l\'execution de la requete pour ajouter un enfant a la BD');
+    }
+    
+}
