@@ -197,6 +197,10 @@ function AfficherJoueur()
                 <input type="submit" name="boutonSupprimer" value="' . $idJoueur . '"
                 </input>
             </td>
+            <td>
+                <input type="submit" name="boutonModifier" value="' . $idJoueur . '"
+                </input>
+            </td>
         </tr>';
     }
 }
@@ -252,8 +256,8 @@ function AfficherInformationsJoueurs($idJoueur)
                 <input type="text" name="champNom" placeholder="Entrez le nom" minlength="1" maxlength="50" value="' . $value . '" required>
                 <span></span>';
             } elseif ($key == 'Prenom') {
-                echo '<label for="champPrénom">Prénom :</label>
-                <input type="text" name="champPrénom" placeholder="Entrez le prénom" minlength="1" maxlength="50" value="' . $value . '"required>
+                echo '<label for="champPrenom">Prénom :</label>
+                <input type="text" name="champPrenom" placeholder="Entrez le prénom" minlength="1" maxlength="50" value="' . $value . '"required>
                 <span></span>';
             } elseif ($key == 'Photo') {
                 echo '<label for="champPhoto">Photo :</label>
@@ -288,10 +292,10 @@ function AfficherInformationsJoueurs($idJoueur)
 
 
 
-$qModifierInformationsJoueur = 'UPDATE Joueur SET Nom=:nom, Prenom=:prenom, Photo:photo,
+$qModifierInformationsJoueur = 'UPDATE Joueur SET Nom=:nom, Prenom=:prenom, Photo=:photo,
  Taille=:taille, Poids=:poids,Poste_Prefere=:postePrefere, Statut=:statut,Commentaires=:commentaires WHERE Id_Joueur = :idJoueur';
 // fonction qui permet de modifier les informations du membre de la session
-function modifierJoueurSession($idJoueur, $nom, $prenom, $photo, $dateNaissance, $taille, $poids, $postePrefere, $statut, $commentaires)
+function modifierJoueurSession($idJoueur, $nom, $prenom, $photo, $taille, $poids, $postePrefere, $statut, $commentaires)
 {
     // connexion a la BD
     $linkpdo = connexionBd();
@@ -307,7 +311,6 @@ function modifierJoueurSession($idJoueur, $nom, $prenom, $photo, $dateNaissance,
         ':nom' => clean($nom),
         ':prenom' => clean($prenom),
         ':photo' => clean($photo),
-        ':dateNaissance' => clean($dateNaissance),
         ':taille' => clean($taille),
         ':poids' => clean($poids),
         ':postePrefere' => clean($postePrefere),

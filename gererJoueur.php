@@ -16,6 +16,9 @@
         if (isset($_POST['boutonSupprimer'])) {
             supprimerJoueur($_POST['boutonSupprimer']);
         }
+        if (isset($_POST['boutonModifier'])) {
+            header("location: modifierJoueur.php");
+        }
         ?>
     </form>
 </body>

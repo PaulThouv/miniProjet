@@ -28,25 +28,28 @@
 
     <div class="miseEnForme" id="miseEnFormeFormulaire">
       <?php
-        AfficherInformationsJoueurs(1);
+      AfficherInformationsJoueurs(7);
       ?>
     </div>
 
     <div class="center" id="boutonsValiderAnnuler">
-      <button type="submit"  name="boutonAnnuler" class="boutonAnnuler"><img src="images/annuler.png" class="imageIcone" alt="icone annuler"><span>Annuler</span></button>
-      <button type="submit"  value="" name="boutonValider" class="boutonEdit" id="boutonValider"><img src="images/edit.png" class="imageIcone" alt="icone valider"><span>Editer </span></button>
+      <button type="submit" name="boutonAnnuler" class="boutonAnnuler"><img src="images/annuler.png" class="imageIcone" alt="icone annuler"><span>Annuler</span></button>
+      <button type="submit" value="" name="boutonValider" class="boutonEdit" id="boutonValider"><img src="images/edit.png" class="imageIcone" alt="icone valider"><span>Editer </span></button>
     </div>
-    
+
     <?php if (isset($_POST['boutonValider'])) {
-      modifierJoueurSession( 1,
-      $_POST['champNom'],
-      $_POST['champPrénom'],
-      $_POST['champPhoto'],
-      $_POST['champTaille'],
-      $_POST['champPoids'],
-      $_POST['champPostePrefere'],
-      $_POST['champStatut'],
-      $_POST['champCom']);
+      modifierJoueurSession(
+        7,
+        $_POST['champNom'],
+        $_POST['champPrenom'],
+        $_POST['champPhoto'],
+        $_POST['champTaille'],
+        $_POST['champPoids'],
+        $_POST['champPostePrefere'],
+        $_POST['champStatut'],
+        $_POST['champCom']
+      );
+      header("location: modifierJoueur.php");
     } ?>
   </form>
   <script src="js/javascript.js"></script>
