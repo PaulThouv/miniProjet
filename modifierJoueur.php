@@ -28,7 +28,7 @@
 
     <div class="miseEnForme" id="miseEnFormeFormulaire">
       <?php
-      AfficherInformationsJoueurs(7);
+      AfficherInformationsJoueurs($_GET['id']);
       ?>
     </div>
 
@@ -39,7 +39,7 @@
 
     <?php if (isset($_POST['boutonValider'])) {
       modifierJoueurSession(
-        7,
+        $_GET['id'],
         $_POST['champNom'],
         $_POST['champPrenom'],
         $_POST['champPhoto'],
@@ -49,7 +49,7 @@
         $_POST['champStatut'],
         $_POST['champCom']
       );
-      header("location: modifierJoueur.php");
+      header('location: modifierJoueur.php?id=' . $_GET['id']);
     } ?>
   </form>
   <script src="js/javascript.js"></script>

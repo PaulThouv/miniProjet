@@ -15,9 +15,10 @@
         AfficherJoueur();
         if (isset($_POST['boutonSupprimer'])) {
             supprimerJoueur($_POST['boutonSupprimer']);
+            header("location: gererJoueur.php");
         }
         if (isset($_POST['boutonModifier'])) {
-            header("location: modifierJoueur.php");
+            header('location: modifierJoueur.php?id=' . $_POST['boutonModifier']);
         }
         ?>
     </form>
