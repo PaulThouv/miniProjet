@@ -7,7 +7,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gérer les joueurs</title>
 </head>
+<style>
+  nav ul {
+    display: flex;
+    background-color: gray;
+  }
+  nav li {
+    list-style: none;
+  }
+  nav a {
+    display: block;
+    padding: 1em;
+    color: white;
+    text-decoration: none;
+  }
+  nav a:hover {
+    background-color: lightgray;
+  }
+  nav {
+    display:flex;
+    justify-content: center;
+    width: 100%;
+    margin-left:auto;
+    margin-right:auto;
+  }
+</style>
 
+<nav>
+  <ul>
+    <li><a href="ajouterJoueur.php">Joueurs</a></li>
+    <li><a href="ajouterMatch.php">Match</a></li>
+    <li><a href="gererJoueur.php">Gerer Joueur</a></li>
+  </ul>
+</nav>
 <body>
     <form method="POST">
         <?php

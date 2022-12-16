@@ -7,6 +7,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter un joueur</title>
 </head>
+<style>
+  nav ul {
+    display: flex;
+    background-color: gray;
+  }
+  nav li {
+    list-style: none;
+  }
+  nav a {
+    display: block;
+    padding: 1em;
+    color: white;
+    text-decoration: none;
+  }
+  nav a:hover {
+    background-color: lightgray;
+  }
+</style>
+
+<nav>
+  <ul>
+    <li><a href="ajouterJoueur.php">Joueurs</a></li>
+    <li><a href="ajouterMatch.php">Match</a></li>
+    <li><a href="gererJoueur.php">Gerer Joueur</a></li>
+  </ul>
+</nav>
+
 
 <?php
 require('QUERY.php');
