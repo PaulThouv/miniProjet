@@ -325,9 +325,9 @@ function modifierJoueurSession($idJoueur, $nom, $prenom, $photo, $taille, $poids
 //-----------------------------------------LE MATCH-------------------------------------------------------
 
 
-$qAjouterMatch = 'INSERT INTO unmatch(Date_Heure_Match,Nom_Adversaire,Lieu_Rencontre,Resultat) 
-VALUES (:idUnMatch,:dateHeureMatch,:nomAdversaire,:lieuRencontre,:resultat)';
-function ajouterMatch($dateHeureMatch,$nomAdversaire,$lieuRencontre,$resultat){
+$qAjouterMatch = 'INSERT INTO unmatch(Date_Heure_Match,Nom_Adversaire,Lieu_Rencontre) 
+VALUES (:dateHeureMatch,:nomAdversaire,:lieuRencontre)';
+function ajouterMatch($dateHeureMatch,$nomAdversaire,$lieuRencontre){
     // connexion a la BD
     $linkpdo = connexionBd();
     // preparation de la requete sql
@@ -337,10 +337,9 @@ function ajouterMatch($dateHeureMatch,$nomAdversaire,$lieuRencontre,$resultat){
     }
     // execution de la requete sql
     $req->execute(array(
-        ':Date_Heure_Match' => clean($dateHeureMatch),
-        ':Nom_Adversaire' => clean($nomAdversaire),
-        ':lieuRencontre' => clean($lieuRencontre),
-        ':Resultat' => clean($resultat)
+        ':dateHeureMatch' => clean($dateHeureMatch),
+        ':nomAdversaire' => clean($nomAdversaire),
+        ':lieuRencontre' => clean($lieuRencontre)   
     ));
     if ($req == false) {
         die('Erreur ! Il y a un probleme lors l\'execution de la requete pour ajouter un enfant a la BD');

@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="description" content="">
     <title>Connexion</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+    <link rel="icon" type="image/x-icon" href="images/ballonRugby.jpg">
+    <link rel="shortcut icon" type="image/x-icon" href="images/ballonRugby.jpg">
     <link rel="stylesheet" href="style/style.css">
 </head>
 
@@ -17,7 +17,7 @@
         <div class="svgWave"></div>
     </div>
     <div class="test"></div>
-    <img src="images/logo.png" alt="logo application" class="iconeApp">
+    <img src="images/ballonRugby.jpg" alt="logo application" class="iconeApp">
 
     <form id="formConnexion" action="indexConnexion.php" method="POST">
         <div class="miseEnForme" id="miseEnFormeConnexion">
