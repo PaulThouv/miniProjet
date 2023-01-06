@@ -17,6 +17,7 @@
     <li><a href="gererJoueur.php">Gerer Joueur</a></li>
   </ul>
 </nav>
+<h1>Création d'un match :</h1>
 <?php
 require('QUERY.php');
 if (champRempli(array('date', 'nomAdv', 'lieuRencontre'))) { {
@@ -39,22 +40,25 @@ if (champRempli(array('date', 'nomAdv', 'lieuRencontre'))) { {
     <input type="text" name="nomAdv" placeholder="Entrez le nom de l'adversaire" minlength="1" maxlength="50" required>
 
     <label for="">Lieu de la rencontre :</label>
-    <input type="text" name="lieuRencontre" placeholder="Indiquer le lieu de la rencontre" minlength="1" maxlength="55" required>
+    <select name="lieuRencontre">
+      <option value="Extérieur">Extérieur</option>
+      <option value="Domicile">Domicile</option>
+    </select>
 
     <!-- <label for="">Resultat</label> -->
     <!-- <input type="text" name="resultat" id="resultat" placeholder="Une fois le match fait indiquer le resultat"> -->
     <input type="submit">
   </form>
   <form action="" method="POST">
-  <h2>Matchs à venir:</h2>
-  <?php
-  afficherMatch();
-  
-  if (isset($_POST['boutonSupprimer'])) {
-    supprimerMatch($_POST['boutonSupprimer']);
-    header("location: gestionMatch.php");
-  }
-  ?>
+    <h2>Matchs à venir :</h2>
+    <?php
+    afficherMatch();
+
+    if (isset($_POST['boutonSupprimer'])) {
+      supprimerMatch($_POST['boutonSupprimer']);
+      header("location: gestionMatch.php");
+    }
+    ?>
   </form>
 </body>
 

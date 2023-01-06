@@ -22,14 +22,7 @@
     <div class="svgWave"></div>
   </div>
 
-  <h1>Modifier les Joueurs</h1>
-  <nav>
-  <ul>
-    <li><a href="ajouterJoueur.php">Joueurs</a></li>
-    <li><a href="gestionMatch.php">Match</a></li>
-    <li><a href="gererJoueur.php">Gerer Joueur</a></li>
-  </ul>
-</nav>
+  <h1>Modifier le Joueur :</h1>
   <?php
   session_start();
   require('QUERY.php');

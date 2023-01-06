@@ -16,6 +16,7 @@
     <li><a href="gererJoueur.php">Gerer Joueur</a></li>
   </ul>
 </nav>
+<h1>Liste des joueurs :</h1>
 
 <body>
   <form method="POST">

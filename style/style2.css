@@ -1,5 +1,6 @@
 .buttonA {
     /* styles for the button */
+    margin-top: 10px;
     display: inline-block;
     padding: 0.5em 1em;
     background: #25a017;
@@ -25,6 +26,7 @@
 
 .buttonD {
     /* styles for the button */
+    margin-top: 10px;
     display: inline-block;
     padding: 0.5em 1em;
     background: #ce3318;
@@ -71,4 +73,10 @@ nav a:hover {
 .imageJoueur {
     width: 40px;
     height: 40px;
+}
+
+.iconeApp {
+    width: 100px;
+    height: 100px;
+    margin-left: 200px;
 }

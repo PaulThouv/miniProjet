@@ -9,7 +9,7 @@
     <title>Connexion</title>
     <link rel="icon" type="image/x-icon" href="images/ballonRugby.jpg">
     <link rel="shortcut icon" type="image/x-icon" href="images/ballonRugby.jpg">
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/style2.css">
 </head>
 
 <body>
@@ -31,7 +31,7 @@
 
         </div>
 
-        <button type="submit" name="boutonConnexion" class="boutons" id="boutonConnexion"><img src="images/unlock.png" class="imageIcone" alt="icone cadenas"><span>Connexion</span></button>
+        <button type="submit" name="boutonConnexion" class="buttonA" id="boutonConnexion"><span>Connexion</span></button>
     </form>
 </body>
 
