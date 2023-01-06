@@ -12,7 +12,7 @@
 <nav>
   <ul>
     <li><a href="ajouterJoueur.php">Joueurs</a></li>
-    <li><a href="ajouterMatch.php">Match</a></li>
+    <li><a href="gestionMatch.php">Match</a></li>
     <li><a href="gererJoueur.php">Gerer Joueur</a></li>
   </ul>
 </nav>
