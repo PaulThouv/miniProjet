@@ -15,6 +15,7 @@
         <li><a href="ajouterJoueur.php">Joueurs</a></li>
         <li><a href="gestionMatch.php">Match</a></li>
         <li><a href="gererJoueur.php">Gerer Joueur</a></li>
+        <li><a href="statistiques.php">Statistiques</a></li>
     </ul>
 </nav>
 <h1>Ajouter un joueur :</h1>
