@@ -48,12 +48,24 @@ if (champRempli(array('date', 'nomAdv', 'lieuRencontre'))) { {
   <form action="" method="POST">
   <h2>Matchs à venir:</h2>
   <?php
-  afficherMatch();
+  afficherMatchAVenir();
   
   if (isset($_POST['boutonSupprimer'])) {
     supprimerMatch($_POST['boutonSupprimer']);
     header("location: gestionMatch.php");
   }
+
+  ?>
+  <h2>Matchs Terminés:</h2>
+  <?php
+  afficherMatchTermine();
+  if (isset($_POST['boutonValider'])) {
+    ajouterScore($_POST['champResultat'],$_POST['boutonValider']);
+    header("location: gestionMatch.php");
+  }
+  
+  
+  
   ?>
   </form>
 </body>
