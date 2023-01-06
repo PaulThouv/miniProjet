@@ -23,6 +23,13 @@
   </div>
 
   <h1>Modifier les Joueurs</h1>
+  <nav>
+  <ul>
+    <li><a href="ajouterJoueur.php">Joueurs</a></li>
+    <li><a href="gestionMatch.php">Match</a></li>
+    <li><a href="gererJoueur.php">Gerer Joueur</a></li>
+  </ul>
+</nav>
   <?php
   session_start();
   require('QUERY.php');

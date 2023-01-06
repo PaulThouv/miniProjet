@@ -45,7 +45,17 @@ if (champRempli(array('date', 'nomAdv', 'lieuRencontre'))) { {
     <!-- <input type="text" name="resultat" id="resultat" placeholder="Une fois le match fait indiquer le resultat"> -->
     <input type="submit">
   </form>
-
+  <form action="" method="POST">
+  <h2>Matchs à venir:</h2>
+  <?php
+  afficherMatch();
+  
+  if (isset($_POST['boutonSupprimer'])) {
+    supprimerMatch($_POST['boutonSupprimer']);
+    header("location: gestionMatch.php");
+  }
+  ?>
+  </form>
 </body>
 
 </html>

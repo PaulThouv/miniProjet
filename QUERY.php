@@ -326,6 +326,8 @@ function modifierJoueurSession($idJoueur, $nom, $prenom, $photo, $taille, $poids
             session');
     }
 }
+
+
 //-----------------------------------------LE MATCH-------------------------------------------------------
 
 
@@ -349,4 +351,53 @@ function ajouterMatch($dateHeureMatch, $nomAdversaire, $lieuRencontre)
     if ($req == false) {
         die('Erreur ! Il y a un probleme lors l\'execution de la requete pour ajouter un enfant a la BD');
     }
+}
+$qAfficherMatch  = 'SELECT Nom_Adversaire,Lieu_Rencontre,Date_Heure_Match,Id_UnMatch FROM unmatch WHERE Date_Heure_Match > NOW() ORDER BY Date_Heure_Match';
+function afficherMatch(){
+     // connexion a la BD
+     $linkpdo = connexionBd();
+     // preparation de la requete sql
+     $req = $linkpdo->prepare($GLOBALS['qAfficherMatch']);
+    if ($req == false) {
+        die('Erreur ! Il y a un probleme lors de la preparation de la requete pour afficher les information des membres');
+    }
+    // execution de la requete sql
+    $req->execute();
+    if ($req == false) {
+        die('Erreur ! Il y a un probleme lors de la preparation de la requete pour afficher les information des membres');
+    }
+    while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+        // permet de parcourir toutes les colonnes de la requete 
+        foreach ($data as $key => $value) {
+            // recuperation de toutes les informations du membre de la session dans des inputs 
+            if ($key == 'Nom_Adversaire' || $key == 'Lieu_Rencontre' || $key == 'Date_Heure_Match') {
+                echo '<td>' . $value . ' | ' . '</td>';
+                
+            }
+            if($key == "Id_UnMatch"  ){
+                $idMatch = $value;
+            }
+            
+        }
+        echo '
+            <td>
+                <button type="submit" name="boutonSupprimer" class="buttonD" value="' . $idMatch . '">Supprimer</button>
+            </td>';
+        echo '<br>';
+}
+}
+$qSupprimerMatch = 'DELETE FROM unmatch WHERE Id_UnMatch = :idMatch';
+function supprimerMatch($idMatch){
+        // connexion a la base de donnees
+        $linkpdo = connexionBd();
+        //on supprime le membre
+        $req = $linkpdo->prepare($GLOBALS['qSupprimerMatch']);
+        if ($req == false) {
+            die('Erreur ! Il y a un probleme lors de la preparation de la requete pour supprimer un match de la BD');
+        }
+        // execution de la requete sql
+        $req->execute(array(':idMatch' => clean($idMatch)));
+        if ($req == false) {
+            die('Erreur ! Il y a un probleme lors l\'execution de la requete pour supprimer un match de la BD');
+        }
 }
