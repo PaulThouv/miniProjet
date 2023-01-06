@@ -2,29 +2,13 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer un nouveau match</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style/style2.css">
+  <title>Créer un nouveau match</title>
 </head>
-<style>
-  nav ul {
-    display: flex;
-    background-color: gray;
-  }
-  nav li {
-    list-style: none;
-  }
-  nav a {
-    display: block;
-    padding: 1em;
-    color: white;
-    text-decoration: none;
-  }
-  nav a:hover {
-    background-color: lightgray;
-  }
-</style>
+
 
 <nav>
   <ul>
@@ -35,33 +19,32 @@
 </nav>
 <?php
 require('QUERY.php');
-if (champRempli(array('date', 'nomAdv', 'lieuRencontre'))) {
-    {
-        ajouterMatch(
-            $_POST['date'],
-            $_POST['nomAdv'],
-            $_POST['lieuRencontre']
-        );
-    }
+if (champRempli(array('date', 'nomAdv', 'lieuRencontre'))) { {
+    ajouterMatch(
+      $_POST['date'],
+      $_POST['nomAdv'],
+      $_POST['lieuRencontre']
+    );
+  }
 }
 // }
 ?>
 
 <body>
-    <form action="" method="POST" enctype="multipart/form-data">
-        <label for="">DateHeureMatch :</label>
-        <input type="datetime-local" name="date" placeholder="Entrez la date" minlength="1" maxlength="50" required>
+  <form action="" method="POST" enctype="multipart/form-data">
+    <label for="">DateHeureMatch :</label>
+    <input type="datetime-local" name="date" placeholder="Entrez la date" minlength="1" maxlength="50" required>
 
-        <label for="">Nom de l'adversaire :</label>
-        <input type="text" name="nomAdv" placeholder="Entrez le nom de l'adversaire" minlength="1" maxlength="50" required>
+    <label for="">Nom de l'adversaire :</label>
+    <input type="text" name="nomAdv" placeholder="Entrez le nom de l'adversaire" minlength="1" maxlength="50" required>
 
-        <label for="">Lieu de la rencontre :</label>
-        <input type="text" name="lieuRencontre" placeholder="Indiquer le lieu de la rencontre"   minlength="1" maxlength="55" required>
+    <label for="">Lieu de la rencontre :</label>
+    <input type="text" name="lieuRencontre" placeholder="Indiquer le lieu de la rencontre" minlength="1" maxlength="55" required>
 
-        <!-- <label for="">Resultat</label> -->
-        <!-- <input type="text" name="resultat" id="resultat" placeholder="Une fois le match fait indiquer le resultat"> -->
-        <input type="submit">
-    </form>
+    <!-- <label for="">Resultat</label> -->
+    <!-- <input type="text" name="resultat" id="resultat" placeholder="Une fois le match fait indiquer le resultat"> -->
+    <input type="submit">
+  </form>
 
 </body>
 

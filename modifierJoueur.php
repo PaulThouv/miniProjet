@@ -7,9 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <meta name="description" content="">
   <title>Modifier objectifs</title>
-  <link rel="icon" type="image/x-icon" href="images/favicon.png">
-  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
-  <link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="style/style2.css">
 </head>
 
 <body>
@@ -33,8 +31,8 @@
     </div>
 
     <div class="center" id="boutonsValiderAnnuler">
-      <button type="submit" name="boutonAnnuler" class="boutonAnnuler"><img src="images/annuler.png" class="imageIcone" alt="icone annuler"><span>Annuler</span></button>
-      <button type="submit" value="" name="boutonValider" class="boutonEdit" id="boutonValider"><img src="images/edit.png" class="imageIcone" alt="icone valider"><span>Editer </span></button>
+      <button type="submit" name="boutonAnnuler" class="buttonD"><span>Annuler</span></button>
+      <button type="submit" value="" name="boutonValider" class="buttonA" id="boutonValider"><span>Editer </span></button>
     </div>
 
     <?php if (isset($_POST['boutonValider'])) {

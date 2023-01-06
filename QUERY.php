@@ -184,7 +184,7 @@ function AfficherJoueur()
         foreach ($data as $key => $value) {
             // selectionne toutes les colonnes $key necessaires
             if ($key == 'Nom' || $key == 'Prenom' || $key == 'Numero_Licence' || $key == 'Poste_Prefere') {
-                echo '<td>' . $value . '</td>';
+                echo '<td>' . $value . ' | ' . '</td>';
             }
             // recuperation valeurs importantes dans des variables
             if ($key == 'id_Joueur') {
@@ -194,12 +194,10 @@ function AfficherJoueur()
         // creation du bouton supprimer dans le tableau
         echo '
             <td>
-                <input type="submit" name="boutonSupprimer" value="' . $idJoueur . '"
-                </input>
+                <button type="submit" name="boutonSupprimer" class="buttonD" value="' . $idJoueur . '">Supprimer</button>
             </td>
             <td>
-                <input type="submit" name="boutonModifier" value="' . $idJoueur . '"
-                </input>
+                <button type="submit" name="boutonModifier" class="buttonA" value="' . $idJoueur . '">Modifier</button>
             </td>
         </tr>';
     }
@@ -327,7 +325,8 @@ function modifierJoueurSession($idJoueur, $nom, $prenom, $photo, $taille, $poids
 
 $qAjouterMatch = 'INSERT INTO unmatch(Date_Heure_Match,Nom_Adversaire,Lieu_Rencontre) 
 VALUES (:dateHeureMatch,:nomAdversaire,:lieuRencontre)';
-function ajouterMatch($dateHeureMatch,$nomAdversaire,$lieuRencontre){
+function ajouterMatch($dateHeureMatch, $nomAdversaire, $lieuRencontre)
+{
     // connexion a la BD
     $linkpdo = connexionBd();
     // preparation de la requete sql
@@ -339,10 +338,9 @@ function ajouterMatch($dateHeureMatch,$nomAdversaire,$lieuRencontre){
     $req->execute(array(
         ':dateHeureMatch' => clean($dateHeureMatch),
         ':nomAdversaire' => clean($nomAdversaire),
-        ':lieuRencontre' => clean($lieuRencontre)   
+        ':lieuRencontre' => clean($lieuRencontre)
     ));
     if ($req == false) {
         die('Erreur ! Il y a un probleme lors l\'execution de la requete pour ajouter un enfant a la BD');
     }
-    
 }
