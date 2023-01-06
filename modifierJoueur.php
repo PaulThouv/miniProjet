@@ -9,6 +9,13 @@
   <title>Modifier objectifs</title>
   <link rel="stylesheet" href="style/style2.css">
 </head>
+<nav>
+  <ul>
+    <li><a href="ajouterJoueur.php">Joueurs</a></li>
+    <li><a href="gestionMatch.php">Match</a></li>
+    <li><a href="gererJoueur.php">Gerer Joueur</a></li>
+  </ul>
+</nav>
 
 <body>
   <div class="svgWaveContains">
@@ -40,7 +47,7 @@
         $_GET['id'],
         $_POST['champNom'],
         $_POST['champPrenom'],
-        $_POST['champPhoto'],
+        uploadImage($_FILES['champPhoto']),
         $_POST['champTaille'],
         $_POST['champPoids'],
         $_POST['champPostePrefere'],

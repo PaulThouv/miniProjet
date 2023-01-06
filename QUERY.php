@@ -162,7 +162,7 @@ function joueurIdentique(
     return $req->rowCount(); // si ligne > 0 alors enfant deja dans la BD
 }
 
-$qAfficherJoueur = 'SELECT id_Joueur, Nom, Prenom, Numero_Licence, Poste_Prefere FROM joueur';
+$qAfficherJoueur = 'SELECT id_Joueur, Photo, Nom, Prenom, Numero_Licence, Poste_Prefere FROM joueur';
 function AfficherJoueur()
 {
     // connexion a la BD
@@ -183,6 +183,10 @@ function AfficherJoueur()
         // permet de parcourir toutes les colonnes de la requete
         foreach ($data as $key => $value) {
             // selectionne toutes les colonnes $key necessaires
+            if ($key == 'Photo') {
+                echo '<img class="imageJoueur" src="' . $value . '" alt="">';
+                echo ' | ';
+            }
             if ($key == 'Nom' || $key == 'Prenom' || $key == 'Numero_Licence' || $key == 'Poste_Prefere') {
                 echo '<td>' . $value . ' | ' . '</td>';
             }
@@ -247,45 +251,47 @@ function AfficherInformationsJoueurs($idJoueur)
     // permet de parcourir la ligne de la requetes 
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
         // permet de parcourir toutes les colonnes de la requete 
+        echo '<table>';
         foreach ($data as $key => $value) {
             // recuperation de toutes les informations du membre de la session dans des inputs 
             if ($key == 'Nom') {
-                echo '<label for="champNom">Nom :</label>
+                echo '<tr><td><label for="champNom">Nom :</label>
                 <input type="text" name="champNom" placeholder="Entrez le nom" minlength="1" maxlength="50" value="' . $value . '" required>
-                <span></span>';
+                <span></span></td>';
             } elseif ($key == 'Prenom') {
-                echo '<label for="champPrenom">Prénom :</label>
+                echo '<td><label for="champPrenom">Prénom :</label>
                 <input type="text" name="champPrenom" placeholder="Entrez le prénom" minlength="1" maxlength="50" value="' . $value . '"required>
-                <span></span>';
+                <span></span></td>';
             } elseif ($key == 'Photo') {
-                echo '<label for="champPhoto">Photo :</label>
-                <input type="text" name="champPhoto" placeholder="Entrez la photo" minlength="1" maxlength="50" value="' . $value . '"required>
-                <span></span>';
+                echo '<td><label for="champPhoto">Photo :</label>
+                <input type="file" name="champPhoto" placeholder="Entrez la photo" minlength="1" maxlength="50" value="' . $value . '"required>
+                <span></span></td></tr>';
             } elseif ($key == 'Taille') {
                 echo '
-                <label for="champTaille">Taille :</label>
+                <tr><td><label for="champTaille">Taille :</label>
                 <input type="text" name="champTaille" placeholder="Entrez la taille" value=' . $value . ' oninput="this.value = this.value.replace(/[^0-9.]/g, \'\').replace(/(\..*)\./g, \'$1\');" maxlength="5" required>
-                <span></span>';
+                <span></span></td>';
             } elseif ($key == 'Poids') {
                 echo '
-                <label for="champPoids">Poids :</label>
+                <td><label for="champPoids">Poids :</label>
                 <input type="text" name="champPoids" placeholder="Entrez le poids" value=' . $value . ' oninput="this.value = this.value.replace(/[^0-9.]/g, \'\').replace(/(\..*)\./g, \'$1\');" maxlength="5" required>
-                <span></span>';
+                <span></span></td>';
             } elseif ($key == 'Poste_Prefere') {
-                echo '<label for="champPostePrefere"> Poste Préféré :</label>
+                echo '<td><label for="champPostePrefere"> Poste Préféré :</label>
                 <input type="text" name="champPostePrefere" placeholder="Entrez le poste préféré" maxlength="50" value="' . $value . '"  required>
-                <span></span>';
+                <span></span></td></tr>';
             } elseif ($key == 'Statut') {
-                echo '<label for="champStatut"> Statut :</label>
+                echo '<tr><td><label for="champStatut"> Statut :</label>
                 <input type="text" name="champStatut" placeholder="Entrez le statut" maxlength="50" value="' . $value . '"  required>
-                <span></span>';
+                <span></span></td>';
             } elseif ($key == 'Commentaires') {
-                echo '<label for="champCom"> Commentaires :</label>
+                echo '<td><label for="champCom"> Commentaires :</label>
                 <input type="text" name="champCom" id="champCom" placeholder=" Commentaires " minlength="1" maxlength="250" value="' . $value . '" required>
-                <span></span>';
+                <span></span></td></tr>';
             }
         }
     }
+    echo '</table>';
 }
 
 

@@ -67,3 +67,8 @@ nav a {
 nav a:hover {
     background-color: lightgray;
 }
+
+.imageJoueur {
+    width: 40px;
+    height: 40px;
+}
