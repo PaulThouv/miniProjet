@@ -370,6 +370,7 @@ function afficherMatchAVenir(){
         // permet de parcourir toutes les colonnes de la requete 
         foreach ($data as $key => $value) {
             // recuperation de toutes les informations du membre de la session dans des inputs 
+            echo '<tr>';
             if ($key == 'Nom_Adversaire' || $key == 'Lieu_Rencontre' || $key == 'Date_Heure_Match') {
                 echo '<td>' . $value . ' | ' . '</td>';
             }
@@ -377,7 +378,7 @@ function afficherMatchAVenir(){
                 $idMatch = $value;
             }
             if($key == "Resultat"){
-                echo '<td>  <input type="text" name="champResultat"placeholder="Domicile-Extérieur" maxlength="50" value="' . $value . '"  required></td>
+                echo '<td>  <input type="text" name="champResultat"placeholder="Domicile-Extérieur" maxlength="50" value="' . $value . '" ></td>
                 ';
             }
         }
@@ -389,9 +390,9 @@ function afficherMatchAVenir(){
             <button type="submit" name="boutonSupprimer" class="buttonD" value="' . $idMatch . '">Supprimer</button>
         </td>
         <td>
-            <button type="submit" name="bouton" class="buttonD" value="' . $idMatch . '">Supprimer</button>
+            <button type="submit" name="boutonRediriger" class="buttonC" value="' . $idMatch . '">Affecter Joueur</button>
         </td>';
-        
+        echo '</tr>';
         echo '<br>';
 }
 }
@@ -413,6 +414,7 @@ function afficherMatchTermine(){
        // permet de parcourir toutes les colonnes de la requete 
        foreach ($data as $key => $value) {
            // recuperation de toutes les informations du membre de la session dans des inputs 
+           echo '<tr>';
            if ($key == 'Nom_Adversaire' || $key == 'Lieu_Rencontre' || $key == 'Date_Heure_Match'|| $key == 'Resultat') {
                echo '<td>' . $value . ' | ' . '</td>';
            }
@@ -424,6 +426,7 @@ function afficherMatchTermine(){
            <td>
                <button type="submit" name="boutonSupprimer" class="buttonD" value="' . $idMatch . '">Supprimer</button>
            </td>';
+           echo '</tr>';
        echo '<br>';
 }
 }

@@ -49,6 +49,31 @@
     transform: translateY(2px);
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 }
+.buttonC {
+    /* styles for the button */
+    margin-top: 10px;
+    display: inline-block;
+    padding: 0.5em 1em;
+    background: #0e78ce;
+    /* red color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.buttonC:hover {
+    /* styles for when the mouse hovers over the button */
+    background: #0e78ce;
+    /* darker red color */
+}
+
+.buttonC:active {
+    /* styles for when the button is clicked */
+    transform: translateY(2px);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
 
 nav ul {
     display: flex;

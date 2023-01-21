@@ -61,18 +61,17 @@ if (champRempli(array('date', 'nomAdv', 'lieuRencontre'))) { {
   }
 if(isset($_POST['boutonModifier'])){
   ajouterScore($_POST['boutonModifier'],$_POST['champResultat']);
+  header("location: gestionMatch.php");
+}
+
+if(isset($_POST['boutonRediriger'])){
+  $_SESSION['idMatch'] = $_POST['boutonModifier'];
+  header("location: affecterJoueur.php");
 }
   ?>
   <h2>Matchs Terminés:</h2>
   <?php
   afficherMatchTermine();
-  if (isset($_POST['boutonValider'])) {
-    ajouterScore($_POST['champResultat'],$_POST['boutonValider']);
-    header("location: gestionMatch.php");
-  }
-  
-  
-  
   ?>
   </form>
 </body>
