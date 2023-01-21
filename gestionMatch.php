@@ -59,7 +59,9 @@ if (champRempli(array('date', 'nomAdv', 'lieuRencontre'))) { {
     supprimerMatch($_POST['boutonSupprimer']);
     header("location: gestionMatch.php");
   }
-
+if(isset($_POST['boutonModifier'])){
+  ajouterScore($_POST['boutonModifier'],$_POST['champResultat']);
+}
   ?>
   <h2>Matchs Terminés:</h2>
   <?php
