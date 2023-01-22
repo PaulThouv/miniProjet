@@ -511,3 +511,41 @@ function afficherJoueurDisponibles(){
         echo '<br>';
 }
 }
+
+$qAJouterparticipation = 'INSERT INTO participe (Id_UnMatch,Id_Joueur) VALUES (:idMatch,:idJoueur)';
+function ajouterParticipation ($idMatch,$idJoueur){
+      // connexion a la BD
+    $linkpdo = connexionBd();
+    // preparation de la requete sql
+    $req = $linkpdo->prepare($GLOBALS['qAJouterparticipation']);
+    if ($req == false) {
+        die('Erreur ! Il y a un probleme lors de la preparation de la requete pour ajouter un enfant a la BD');
+    }
+    // execution de la requete sql
+    $req->execute(array(
+        ':idMatch' => clean($idMatch),
+        '::idJoueur' => clean($idJoueur)
+    ));
+    if ($req == false) {
+        die('Erreur ! Il y a un probleme lors l\'execution de la requete pour ajouter un enfant a la BD');
+    }
+}
+
+
+$qAfficherJoueurParticiper = 'SELECT joueur.Id_Joueur,Photo,Nom,Prenom,Taille,Poids,Commentaires from joueur,participe WHERE participe.id_Joueur = joueur.Id_Joueur AND participe.Id_Match = :idMatch';
+function AfficherJoueurParticiper($idMatch){
+    // connexion a la BD
+    $linkpdo = connexionBd();
+    // preparation de la requete sql
+    $req = $linkpdo->prepare($GLOBALS['qAfficherJoueurParticiper']);
+    if ($req == false) {
+      die('Erreur ! Il y a un probleme lors de la preparation de la requete pour ajouter un enfant a la BD');
+    }
+    // execution de la requete sql
+    $req->execute(array(
+      ':idMatch' => clean($idMatch)
+    ));
+    if ($req == false) {
+       die('Erreur ! Il y a un probleme lors l\'execution de la requete pour ajouter un enfant a la BD');
+  }
+}

@@ -23,9 +23,20 @@
   <h1>Affectation des joueurs</h1>
 
   <h2>Joueurs déjà sélectionnés:</h2>
+  <?php
+    require("QUERY.php");
+    AfficherJoueurParticiper($_SESSION['idMatch']);?>
   <h2>Joueurs disponibles:</h2>
-  <? afficherJoueurDisponibles() ?>
   
+  <?php 
+    
+    afficherJoueurDisponibles() ;
+    if(isset($_POST['boutonValider'])){
+      ajouterParticipation($_SESSION['idMatch'],$_POST['boutonValider']);
+    }
+
+
+    ?>
 </body>
 
 
