@@ -466,3 +466,48 @@ function ajouterScore($idMatch,$resultat){
             session');
     }
 }
+
+$qAfficherJoueurDisponibles = 'SELECT Id_Joueur,Photo,Nom,Prenom,Taille,Poids,Commentaires from joueur Where Statut = 1';
+function afficherJoueurDisponibles(){
+     // connexion a la BD
+     $linkpdo = connexionBd();
+     // preparation de la requete sql
+     $req = $linkpdo->prepare($GLOBALS['qAfficherJoueurDisponibles']);
+    if ($req == false) {
+        die('Erreur ! Il y a un probleme lors de la preparation de la requete pour afficher les information des membres');
+    }
+    // execution de la requete sql
+    $req->execute();
+    if ($req == false) {
+        die('Erreur ! Il y a un probleme lors de la preparation de la requete pour afficher les information des membres');
+    }
+    while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+        // permet de parcourir toutes les colonnes de la requete 
+        foreach ($data as $key => $value) {
+            // recuperation de toutes les informations du membre de la session dans des inputs 
+            echo '<tr>';
+            if ($key == 'Photo') {
+                echo '<img class="imageJoueur" src="' . $value . '" alt="">';
+                echo ' | ';
+            }
+            
+            if ($key == 'Nom' || $key == 'Prenom' || $key == 'Taille'|| $key == 'Poids'|| $key == 'Commentaires') {
+                echo '<td>' . $value . ' | ' . '</td>';
+            }
+            if($key=='Id_Joueur'){
+                $id = $value;
+            }
+
+            
+        }
+        echo '
+            <td>
+                <button type="submit" name="boutonSupprimer" class="buttonD" value="' . $id . '">Supprimer</button>
+            </td>
+            <td>
+                <button type="submit" name="boutonValider" class="buttonA" value="' . $id . '">Ajouter à la selection</button>
+            </td>';
+            echo '</tr>';
+        echo '<br>';
+}
+}

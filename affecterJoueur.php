@@ -19,4 +19,15 @@
   </ul>
 </nav>
 
+<body>
+  <h1>Affectation des joueurs</h1>
+
+  <h2>Joueurs déjà sélectionnés:</h2>
+  <h2>Joueurs disponibles:</h2>
+  <? afficherJoueurDisponibles() ?>
+  
+</body>
+
+
+
 
